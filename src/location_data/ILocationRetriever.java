@@ -1,6 +1,5 @@
 package location_data;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public interface ILocationRetriever {
