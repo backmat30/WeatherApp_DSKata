@@ -124,16 +124,16 @@ public class AppGUI extends JFrame {
         String currentConditionString = (String) currentConditions.get("description");
         weatherLabel.setText(currentConditionString);
 
-        String currentTemp = (String) currentWeather.get("temp");
+        double currentTemp = (double) currentWeather.get("temp");
         temperatureLabel.setText(currentTemp + "°F");
 
-        String currentFeelsLike = (String) currentWeather.get("feels_like");
+        double currentFeelsLike = (double) currentWeather.get("feels_like");
         feelsLikeTemperatureLabel.setText(currentFeelsLike + "°F");
 
-        String currentHumidity = (String) currentWeather.get("humidity");
+        long currentHumidity = (long) currentWeather.get("humidity");
         humidityLabel.setText(currentHumidity + "%");
 
-        String currentWindSpeed = (String) currentWeather.get("wind_speed");
+        double currentWindSpeed = (double) currentWeather.get("wind_speed");
         windSpeedLabel.setText(currentWindSpeed + " mph");
       }
     });

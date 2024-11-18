@@ -1,6 +1,7 @@
 package weather_data;
 
 import location_data.ILocationRetriever;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import utils.HttpURLConnector;
@@ -38,9 +39,10 @@ public class OWMWeatherRetriever implements IWeatherRetriever {
     long currentTime = System.currentTimeMillis() / 1000;
     String units = "imperial";
 
-    String url = "https://api.openweathermap.org/data/3.0/onecall/day_summary?lat=" + latitude +
+    String url = "https://api.openweathermap.org/data/3.0/onecall/timemachine?lat=" + latitude +
             "&lon=" + longitude +
             "&dt=" + currentTime +
+            "&units=" + units +
             "&appid=" + OWM_API_KEY;
 
     try {
@@ -63,7 +65,8 @@ public class OWMWeatherRetriever implements IWeatherRetriever {
       JSONParser parser = new JSONParser();
       JSONObject responseJSONObj = (JSONObject) parser.parse(response.toString());
 
-      JSONObject currentWeather = (JSONObject) responseJSONObj.get("current");
+      JSONArray data = (JSONArray) responseJSONObj.get("data");
+      JSONObject currentWeather = (JSONObject) data.getFirst();
       String weatherIcon = (String) currentWeather.get("icon");
 
       currentWeather.put("icon", "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png");
